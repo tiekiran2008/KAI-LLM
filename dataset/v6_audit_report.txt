@@ -1,0 +1,28 @@
+KAI-LLM v6 Dataset Audit Report
+========================================
+
+Source parts: dataset/v6_parts/part_001.json through dataset/v6_parts/part_012.json
+Output dataset: dataset/kai_llm_v6.json
+
+1. Total examples: 1200
+2. Duplicate instructions: 0
+3. Empty instructions: 0
+4. Empty responses: 0
+5. Examples with code: 823
+6. Category counts: {'computer_vision': 66, 'ml_coding': 86, 'llm_rag': 74, 'deep_learning': 66, 'backend_coding': 86, 'python': 74, 'agent_coding': 76, 'deep_learning_coding': 74, 'computer_vision_coding': 74, 'python_coding': 88, 'code_review_coding': 78, 'machine_learning': 74, 'software_engineering_coding': 66, 'software_engineering': 66, 'rag_coding': 86, 'ai_agents': 66}
+7. Banned-pattern matches: 0
+8. Malformed entries: 0
+9. All 12 parts contributed 100 examples each: True
+
+BANNED PATTERNS CHECKED:
+KEYPOINT:
+TextIOWrapper
+<_io.
+This is a high-quality explanation
+It addresses:
+kai_llm_v4.json
+kaiqwen_v4
+kaiwen_v4
+kai_le_wan_ding_v4
+
+STATUS: All banned patterns eliminated (0 matches)

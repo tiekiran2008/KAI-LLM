@@ -1,0 +1,615 @@
+{
+  "version": "6.0",
+  "model_goal": "AI/ML and Software Engineering Assistant",
+  "categories": [
+    "machine_learning",
+    "deep_learning",
+    "computer_vision",
+    "llm_rag",
+    "ai_agents",
+    "python",
+    "software_engineering"
+  ],
+  "examples": [
+    {
+      "category": "ml_coding",
+      "instruction": "[practical scenario] [Intermediate level] Compare and contrast: Train a logistic regression classifier on the Iris dataset.",
+      "response": "import numpy as np\nfrom sklearn.datasets import load_iris\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\n\ndata = load_iris()\nX, y = data.data, data.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\nmodel = LogisticRegression(max_iter=1000)\nmodel.fit(X_train, y_train)\nscore = model.score(X_test, y_test)\nprint(f'Accuracy: {score:.4f}')",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[common_mistakes scenario] [Beginner level] What are best practices for what is the vanishing gradient problem and how to fix it?",
+      "response": "The vanishing gradient problem occurs when gradients exponentially shrink through deep network layers, hindering training of early layers. Solutions: ReLU/LeakyReLU activation, residual connections (ResNets), layer normalization, and proper weight initialization (He/Xavier).",
+      "code": ""
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[practical scenario] [Advanced level] What is Explain the bias-variance tradeoff with a real-world example.?",
+      "response": "The bias-variance tradeoff balances model complexity (variance) against error from incorrect assumptions (bias). High variance = overfitting; high bias = underfitting. Optimal model complexity minimizes total error = bias² + variance + irreducible error.",
+      "code": ""
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[practical scenario] [Intermediate level] What is What is the vanishing gradient problem and how to fix it??",
+      "response": "The vanishing gradient problem occurs when gradients exponentially shrink through deep network layers, hindering training of early layers. Solutions: ReLU/LeakyReLU activation, residual connections (ResNets), layer normalization, and proper weight initialization (He/Xavier).",
+      "code": ""
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[Intermediate level] What is Create an agent that can select between multiple tools dynamically.?",
+      "response": "import json\nfrom typing import Optional\n\nclass Tool:\n    name: str\n    description: str\n    func: Optional[callable] = None\n\nclass ReActAgent:\n    def __init__(self, tools=None):\n        self.tools = tools or []\n        self.memory = []\n    \n    def think(self, query: str) -> str:\n        '''Reason about the query and decide on action.'''\n        if any(op in query for op in ['+', '-', '*', '/']):\n            return f'ACTION: calculate({query})'\n        return f'ANSWER: Based on knowledge, {query}'\n    \n    def act(self, action: str) -> str:\n        '''Execute the action and return result.'''\n        if action.startswith('calculate:'):\n            expr = action[len('calculate:'):]\n            try:\n                result = eval(expr)\n                return f'OBSERVATION: {result}'\n            except:\n                return f'OBSERVATION: Error calculating {expr}'\n        return f'OBSERVATION: Not implemented'\n    \n    def run(self, query: str) -> str:\n        '''Run the ReAct loop.'''\n        steps = 0\n        while steps < 10:\n            thought = self.think(query)\n            if thought.startswith('ANSWER:'):\n                return thought[9:].strip()\n            action = self.act(thought)\n            self.memory.append((thought, action))\n            if 'OBSERVATION:' in action:\n                query = action\n            steps += 1\n        return 'Max steps reached'\n\n# Example usage:\n# agent = ReActAgent()\n# result = agent.run('What is 15 * 23?')\n# print(result)",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "My object detector works on training images but performs poorly on real camera images. What should I investigate?",
+      "response": "Check whether real camera data differs from the training data in lighting, camera angle, resolution, background, object size, blur or occlusion. Also inspect annotation quality and preprocessing. Collecting representative real-world data and using appropriate augmentation can improve robustness.",
+      "code": null
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[real_world scenario] [Advanced level] Explain Explain continuous integration and deployment pipelines.",
+      "response": "Code review example for [real_world scenario] [advanced level] explain explain continuous integration and deployment pipelines.",
+      "code": ""
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[practical scenario] [Beginner level] Write Python code to create a simple react agent that can use a calculator tool.",
+      "response": "import json\nfrom typing import Optional\n\nclass Tool:\n    name: str\n    description: str\n    func: Optional[callable] = None\n\nclass ReActAgent:\n    def __init__(self, tools=None):\n        self.tools = tools or []\n        self.memory = []\n    \n    def think(self, query: str) -> str:\n        '''Reason about the query and decide on action.'''\n        if any(op in query for op in ['+', '-', '*', '/']):\n            return f'ACTION: calculate({query})'\n        return f'ANSWER: Based on knowledge, {query}'\n    \n    def act(self, action: str) -> str:\n        '''Execute the action and return result.'''\n        if action.startswith('calculate:'):\n            expr = action[len('calculate:'):]\n            try:\n                result = eval(expr)\n                return f'OBSERVATION: {result}'\n            except:\n                return f'OBSERVATION: Error calculating {expr}'\n        return f'OBSERVATION: Not implemented'\n    \n    def run(self, query: str) -> str:\n        '''Run the ReAct loop.'''\n        steps = 0\n        while steps < 10:\n            thought = self.think(query)\n            if thought.startswith('ANSWER:'):\n                return thought[9:].strip()\n            action = self.act(thought)\n            self.memory.append((thought, action))\n            if 'OBSERVATION:' in action:\n                query = action\n            steps += 1\n        return 'Max steps reached'\n\n# Example usage:\n# agent = ReActAgent()\n# result = agent.run('What is 15 * 23?')\n# print(result)",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[real_world scenario] [Advanced level] Write Python code to explain react pattern (reasoning + acting).",
+      "response": "ReAct (Reasoning+Act) pattern combines thought/action loops: think (reason about query), act (execute tool/calculate), observe (get result), repeat. This enables autonomous agents to handle math, search, and multi-step reasoning with transparency via the thought trace.",
+      "code": ""
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[practical scenario] [Intermediate level] Write Python code to explain the difference between naive rag and advanced rag pipelines.",
+      "response": "Naive RAG retrves relevant documents from a vector store and concatenates them with the prompt for the LLM. Limitations: no query optimization, no context compression, no handling of retrieved document quality, and potential hallucination from irrelevant context.",
+      "code": ""
+    },
+    {
+      "category": "python",
+      "instruction": "[practical scenario] [Beginner level] Compare and contrast: What are decorators and how do they work in Python?",
+      "response": "Code review example for [practical scenario] [beginner level] compare and contrast: what are decorators and how do they work in python?",
+      "code": ""
+    },
+    {
+      "category": "software_engineering_coding",
+      "instruction": "[Intermediate level] Explain Implement a task queue using Redis and Celery.",
+      "response": "import redis\nfrom celery import Celery\n\nredis_client = redis.Redis(host='localhost', port=6379, db=0)\napp = Celery('tasks', broker='redis://localhost:6379/0')\n\n@app.task\ndef add(x, y):\n    '''Add two numbers with Redis caching.'''\n    cache_key = f'add:{x}:{y}'\n    cached = redis_client.get(cache_key)\n    if cached:\n        return int(cached)\n    \n    result = x + y\n    redis_client.setex(cache_key, 300, result)\n    return result\n\n# Example usage:\n# result = add.delay(3, 5)\n# print(result.get())",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[real_world scenario] [Intermediate level] Compare and contrast: Explain the SOLID principles with code examples.",
+      "response": "SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion. These design principles improve maintainability, flexibility, and testability of software systems. Widely used in enterprise software design and architecture.",
+      "code": ""
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[real_world scenario] [Beginner level] What are best practices for explain technical debt and strategies for reduction.",
+      "response": "Technical debt represents accumulated shortcuts, quick fixes, and design compromises that hinder future development. Cataloging via debt inventory, prioritizing remediation, and allocating regular refactoring time prevents accumulation and maintains agility.",
+      "code": ""
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[common_mistakes scenario] [Beginner level] Explain Design a REST API endpoint for user authentication.",
+      "response": "Explanation of [common_mistakes scenario] [Beginner level] Explain Design a REST API endpoint for user authentication.: This requires understanding the core concepts, typical use cases, and practical implications within the backend_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "deep_learning_coding",
+      "instruction": "Fix a PyTorch inference function that still builds computation graphs.",
+      "response": "Disable gradient tracking:\n\ndef predict(model, x):\n    model.eval()\n\n    with torch.no_grad():\n        return model(x)\n\nFor newer inference-only workloads, torch.inference_mode() can also be considered.",
+      "code": "def predict(model, x):\n    model.eval()\n    return model(x)"
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "Why should the test set not be repeatedly used while tuning a model?",
+      "response": "Repeatedly making decisions based on test performance indirectly tunes the system to the test set. This makes the final test result overly optimistic. Use training data for learning, validation data for development decisions, and keep the test set untouched until final evaluation.",
+      "code": null
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[common_mistakes scenario] [Intermediate level] Explain Explain the difference between naive RAG and advanced RAG pipelines.",
+      "response": "Naive RAG retrves relevant documents from a vector store and concatenates them with the prompt for the LLM. Limitations: no query optimization, no context compression, no handling of retrieved document quality, and potential hallucination from irrelevant context.",
+      "code": ""
+    },
+    {
+      "category": "python",
+      "instruction": "[common_mistakes scenario] [Intermediate level] Write Python code to what are python descriptors and how are they used?",
+      "response": "Code review example for [common_mistakes scenario] [intermediate level] write python code to what are python descriptors and how are they used?",
+      "code": ""
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[Advanced level] What are best practices for implement a vector search function using faiss.",
+      "response": "Substantive response about [Advanced level] What are best practices for implement a vector search function using faiss. in the rag_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "Design structured state for a code-review agent workflow.",
+      "response": "A typed structure is clearer:\n\nfrom typing import TypedDict\n\nclass ReviewState(TypedDict):\n    repository_id: str\n    request: str\n    retrieved_context: list[str]\n    findings: list[dict]\n    tool_results: list[dict]\n    status: str\n\nStructured state makes workflow transitions easier to understand, validate and test.",
+      "code": "state = {}"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "The RAG application sends every retrieved chunk to the LLM. What production problem can this cause and how should it be improved?",
+      "response": "Sending a large number of chunks can introduce irrelevant information, increase latency and consume the model's context window.\n\nRetrieve a reasonable candidate set, evaluate relevance, optionally rerank it, remove redundant results and send only the strongest context needed for the question. Context construction should also respect the model's token budget.",
+      "code": "results = vector_db.search(query_vector, limit=100)\n\ncontext = \"\\n\".join(\n    result.text for result in results\n)\n\nanswer = llm.generate(context + question)\n"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "[practical scenario] [Beginner level] Explain Write a decorator that measures function execution time.",
+      "response": "def timer_decorator(func):\n    import time\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        end = time.time()\n        print(f\"{func.__name__} executed in {end-start:.4f}s\")\n        return result\n    return wrapper\n\n@timer_decorator\ndef slow_function():\n    import time\n    time.sleep(0.5)\n    return \"done\"\n\n# Example usage:\nslow_function()",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "What is tool calling in an AI agent?",
+      "response": "Tool calling allows an agent to use external functions or services. For example, an agent may search a database, retrieve repository information, call an API or run an approved application function and then use the result to continue the task.",
+      "code": null
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[Beginner level] Write Python code to create a pipeline that splits documents into chunks and embeds them.",
+      "response": "Substantive response about [Beginner level] Write Python code to create a pipeline that splits documents into chunks and embeds them. in the rag_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[real_world scenario] [Intermediate level] Compare and contrast: Design a REST API endpoint for user authentication.",
+      "response": "Comparison of related concepts in [real_world scenario] [Intermediate level] Compare and contrast: Design a REST API endpoint for user authentication.: Each has distinct characteristics, use cases, and tradeoffs. The specific differences depend on the context and application requirements.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "Why should image preprocessing be identical between training and production inference?",
+      "response": "The model learned from inputs transformed using the training preprocessing pipeline.\n\nProduction should apply the same deterministic preprocessing:\n\nimage\nÃ¢â€ â€™ color conversion\nÃ¢â€ â€™ resize/crop\nÃ¢â€ â€™ tensor conversion\nÃ¢â€ â€™ normalization\n\nOtherwise the input distribution can differ from what the model saw during training and accuracy may drop.",
+      "code": "# training uses resize + normalization\n# production only converts image to tensor"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[common_mistakes scenario] [Intermediate level] What is Write code to retrieve top-k relevant documents for a query.?",
+      "response": "[common_mistakes scenario] [Intermediate level] What is Write code to retrieve top-k relevant documents for a query.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "software_engineering_coding",
+      "instruction": "[real_world scenario] [Intermediate level] What is Implement a task queue using Redis and Celery.?",
+      "response": "import redis\nfrom celery import Celery\n\nredis_client = redis.Redis(host='localhost', port=6379, db=0)\napp = Celery('tasks', broker='redis://localhost:6379/0')\n\n@app.task\ndef add(x, y):\n    '''Add two numbers with Redis caching.'''\n    cache_key = f'add:{x}:{y}'\n    cached = redis_client.get(cache_key)\n    if cached:\n        return int(cached)\n    \n    result = x + y\n    redis_client.setex(cache_key, 300, result)\n    return result\n\n# Example usage:\n# result = add.delay(3, 5)\n# print(result.get())",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[real_world scenario] [Intermediate level] What are best practices for what is context compression in rag systems?",
+      "response": "Code review example for [real_world scenario] [intermediate level] what are best practices for what is context compression in rag systems?",
+      "code": ""
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "Freeze a pretrained computer-vision backbone for feature extraction.",
+      "response": "Disable gradients for the backbone:\n\nfor parameter in model.parameters():\n    parameter.requires_grad = False\n\nThen replace or enable the task-specific head:\n\nfor parameter in model.classifier.parameters():\n    parameter.requires_grad = True\n\nThe exact head name depends on the architecture.",
+      "code": "model = pretrained_model"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[common_mistakes scenario] [Advanced level] Explain Write code to compute IoU between two bounding boxes.",
+      "response": "def calculate_iou(box1, box2):\n    '''Calculate Intersection over Union (IoU) of two bounding boxes.'''\n    x1 = max(box1[0], box2[0])\n    y1 = max(box1[1], box2[1])\n    x2 = min(box1[2], box2[2])\n    y2 = min(box1[3], box2[3])\n    \n    intersection = max(0, x2 - x1) * max(0, y2 - y1)\n    \n    box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])\n    box2_area = (box2[2] - box2[0]) * (box2[3] - box2[1])\n    \n    union = box1_area + box2_area - intersection\n    \n    return intersection / union if union > 0 else 0\n\n# Example usage:\nbox_a = [0, 0, 10, 10]\nbox_b = [5, 5, 15, 15]\nprint(f'Iou: {calculate_iou(box_a, box_b):.4f}')",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[common_mistakes scenario] [Intermediate level] Explain Implement object detection inference with YOLOv8.",
+      "response": "Explanation of [common_mistakes scenario] [Intermediate level] Explain Implement object detection inference with YOLOv8.: This requires understanding the core concepts, typical use cases, and practical implications within the computer_vision_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "[common_mistakes scenario] [Intermediate level] What is Create a pipeline for preprocessing text data.?",
+      "response": "[common_mistakes scenario] [Intermediate level] What is Create a pipeline for preprocessing text data.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "Why is storing an entire large source-code repository as one embedding bad for RAG?",
+      "response": "One embedding for an entire repository mixes many unrelated concepts and makes precise retrieval difficult.\n\nSplit the repository into meaningful chunks such as files, classes, functions or bounded text sections.\n\nEach chunk can store metadata such as repository ID, file path, language and line range.\n\nThe retriever can then return only the code relevant to the user's question.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "[real_world scenario] [Beginner level] Compare and contrast: Write a function to find the k-th largest element in an array.",
+      "response": "def find_kth_largest(nums, k):\n    nums.sort(reverse=True)\n    return nums[k-1]\n\n# Example usage:\nresult = find_kth_largest([3, 1, 4, 1, 5, 9, 2, 6], 3)\nprint(f\"{k}-th largest: {result}\")",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[real_world scenario] [Intermediate level] What are best practices for explain attention mechanism in neural networks.",
+      "response": "Attention mechanism computes weighted focus over input sequences: Attention(Q,K,V) = softmax(QKᵀ/√d)·V. It enables transformers to capture long-range dependencies without recurrence, revolutionizing NLP and vision.",
+      "code": ""
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[Intermediate level] Compare and contrast: Explain attention mechanism in neural networks.",
+      "response": "Attention mechanism computes weighted focus over input sequences: Attention(Q,K,V) = softmax(QKᵀ/√d)·V. It enables transformers to capture long-range dependencies without recurrence, revolutionizing NLP and vision.",
+      "code": ""
+    },
+    {
+      "category": "software_engineering_coding",
+      "instruction": "Add an integration test for a repository create-and-read workflow.",
+      "response": "A simplified integration test is:\n\ndef test_create_then_read_repository(\n    client\n):\n    created = client.post(\n        \"/repositories\",\n        json={\n            \"name\": \"demo\",\n            \"url\": \"https://example.com/repo\"\n        }\n    )\n\n    assert created.status_code == 201\n\n    repo_id = created.json()[\"id\"]\n\n    fetched = client.get(\n        f\"/repositories/{repo_id}\"\n    )\n\n    assert fetched.status_code == 200\n    assert fetched.json()[\"name\"] == \"demo\"\n\nUse an isolated test database rather than production state.",
+      "code": "# client is a test API client"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "When should I use a single agent instead of multiple agents?",
+      "response": "Use a single agent when one model and a small set of tools can handle the workflow clearly. Multiple agents are more useful when tasks have genuinely different responsibilities or need separate workflows. Adding agents without a clear reason increases complexity, latency and debugging difficulty.",
+      "code": null
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[practical scenario] [Advanced level] What are best practices for design error handling for a payment processing api.",
+      "response": "Substantive response about [practical scenario] [Advanced level] What are best practices for design error handling for a payment processing api. in the backend_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "Add useful metadata when indexing a source-code chunk.",
+      "response": "Store traceability metadata:\n\nvector_db.add(\n    vector=embedding,\n    text=chunk,\n    metadata={\n        \"repo_id\": repo_id,\n        \"file_path\": file_path,\n        \"start_line\": start_line,\n        \"end_line\": end_line,\n        \"commit_hash\": commit_hash,\n        \"language\": language\n    }\n)\n\nMetadata supports filtering, citations and index-version tracking.",
+      "code": "vector_db.add(\n    vector=embedding,\n    text=chunk\n)"
+    },
+    {
+      "category": "software_engineering_coding",
+      "instruction": "[real_world scenario] [Intermediate level] What are best practices for implement circuit breaker pattern for external service calls.",
+      "response": "Substantive response about [real_world scenario] [Intermediate level] What are best practices for implement circuit breaker pattern for external service calls. in the software_engineering_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[common_mistakes scenario] [Beginner level] What is Implement a database connection pool using asyncpg.?",
+      "response": "import asyncpg\n\nasync def get_db_pool():\n    pool = await asyncpg.create_pool(\n        user='postgres',\n        password='password',\n        host='localhost',\n        database='mydb',\n        min_size=2,\n        max_size=10\n    )\n    return pool",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[real_world scenario] [Intermediate level] What is Create a simple ReAct agent that can use a calculator tool.?",
+      "response": "import json\nfrom typing import Optional\n\nclass Tool:\n    name: str\n    description: str\n    func: Optional[callable] = None\n\nclass ReActAgent:\n    def __init__(self, tools=None):\n        self.tools = tools or []\n        self.memory = []\n    \n    def think(self, query: str) -> str:\n        '''Reason about the query and decide on action.'''\n        if any(op in query for op in ['+', '-', '*', '/']):\n            return f'ACTION: calculate({query})'\n        return f'ANSWER: Based on knowledge, {query}'\n    \n    def act(self, action: str) -> str:\n        '''Execute the action and return result.'''\n        if action.startswith('calculate:'):\n            expr = action[len('calculate:'):]\n            try:\n                result = eval(expr)\n                return f'OBSERVATION: {result}'\n            except:\n                return f'OBSERVATION: Error calculating {expr}'\n        return f'OBSERVATION: Not implemented'\n    \n    def run(self, query: str) -> str:\n        '''Run the ReAct loop.'''\n        steps = 0\n        while steps < 10:\n            thought = self.think(query)\n            if thought.startswith('ANSWER:'):\n                return thought[9:].strip()\n            action = self.act(thought)\n            self.memory.append((thought, action))\n            if 'OBSERVATION:' in action:\n                query = action\n            steps += 1\n        return 'Max steps reached'\n\n# Example usage:\n# agent = ReActAgent()\n# result = agent.run('What is 15 * 23?')\n# print(result)",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[common_mistakes scenario] [Beginner level] What is Create data augmentation pipeline for image training.?",
+      "response": "[common_mistakes scenario] [Beginner level] What is Create data augmentation pipeline for image training.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[Intermediate level] What is Create an endpoint that handles file uploads efficiently.?",
+      "response": "[Intermediate level] What is Create an endpoint that handles file uploads efficiently.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[practical scenario] [Intermediate level] What is What is reinforcement learning and how does it differ from supervised learning??",
+      "response": "Reinforcement learning trains agents to maximize cumulative reward via trial-and-error interactions with an environment. Key components: policy, value function, and reward signal. Example: Q-learning updates Q(s,a) := Q(s,a) + α[r + γ·max_a'Q(s',a') - Q(s,a)].",
+      "code": ""
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[real_world scenario] [Beginner level] Write Python code to what is the vanishing gradient problem and how to fix it?",
+      "response": "The vanishing gradient problem occurs when gradients exponentially shrink through deep network layers, hindering training of early layers. Solutions: ReLU/LeakyReLU activation, residual connections (ResNets), layer normalization, and proper weight initialization (He/Xavier).",
+      "code": ""
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[common_mistakes scenario] [Intermediate level] What are best practices for design a rest api endpoint for user authentication.",
+      "response": "Substantive response about [common_mistakes scenario] [Intermediate level] What are best practices for design a rest api endpoint for user authentication. in the backend_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[common_mistakes scenario] [Intermediate level] Write Python code to explain transfer learning and when to use it.",
+      "response": "Transfer learning leverages pretrained model weights on source task to improve performance on target task. Common approaches: fine-tuning, feature extraction, and domain adaptation. Particularly effective when target task has limited data.",
+      "code": ""
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[practical scenario] [Intermediate level] Explain Create an endpoint that handles file uploads efficiently.",
+      "response": "Explanation of [practical scenario] [Intermediate level] Explain Create an endpoint that handles file uploads efficiently.: This requires understanding the core concepts, typical use cases, and practical implications within the backend_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "python",
+      "instruction": "[real_world scenario] [Intermediate level] What are best practices for what are python descriptors and how are they used?",
+      "response": "Code review example for [real_world scenario] [intermediate level] what are best practices for what are python descriptors and how are they used?",
+      "code": ""
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[practical scenario] [Beginner level] What are best practices for explain query expansion for improved retrieval.",
+      "response": "Query expansion improves retrieval by adding semantically related terms to the original query. Techniques: thesaurus-based expansion, pseudo-relevance feedback (PRF), and LLM-generated query rewrite. Increases recall for relevant documents.",
+      "code": ""
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[Intermediate level] Compare and contrast: Implement semantic segmentation inference with U-Net.",
+      "response": "Comparison of related concepts in [Intermediate level] Compare and contrast: Implement semantic segmentation inference with U-Net.: Each has distinct characteristics, use cases, and tradeoffs. The specific differences depend on the context and application requirements.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[Beginner level] Write Python code to what is tool use in ai agents and when is it useful?",
+      "response": "Tool use in AI agents provides external capabilities: calculators, search APIs, databases, and code interpreters. Agents decide when to use tools via reasoning, then execute and incorporate observations into subsequent thoughts. Essential for complex reasoning beyond parametric knowledge.",
+      "code": ""
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[real_world scenario] [Beginner level] Explain What are kernel methods and when are they useful?",
+      "response": "Kernel methods enable learning in high-dimensional spaces via kernel tricks (e.g., RBF kernel k(x,y) = exp(-γ||x-y||²)). They implicitly map data to higher dimensions without explicit coordinates, useful for SVMs and beyond.",
+      "code": ""
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "A RAG system creates embeddings with one model during indexing and a different unrelated embedding model for queries. Why is this a problem?",
+      "response": "Stored document vectors and query vectors must live in a compatible embedding space.\n\nUsing unrelated embedding models can make similarity scores meaningless even when their vector dimensions happen to match.\n\nUse the same embedding model, or an explicitly compatible query/document embedding pair designed to work together.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[common_mistakes scenario] [Beginner level] Explain Explain the SOLID principles with code examples.",
+      "response": "SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion. These design principles improve maintainability, flexibility, and testability of software systems. Widely used in enterprise software design and architecture.",
+      "code": ""
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[real_world scenario] [Advanced level] What is What are embedding models and how are they evaluated??",
+      "response": "Advanced RAG pipelines include query expansion, context compression, document reranking, and hallucination mitigation. Stages: query preprocessing → retrieval → re-ranking → context compression → answer generation. Significantly improves answer quality and relevance.",
+      "code": ""
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[real_world scenario] [Beginner level] Write Python code to explain the solid principles with code examples.",
+      "response": "SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion. These design principles improve maintainability, flexibility, and testability of software systems. Widely used in enterprise software design and architecture.",
+      "code": ""
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "What is a context window in an LLM?",
+      "response": "The context window is the amount of tokenized information the model can process in one request, including instructions, conversation history, retrieved context and generated tokens.",
+      "code": null
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "[common_mistakes scenario] [Advanced level] Explain Explain data augmentation for small medical image datasets.",
+      "response": "Data augmentation for small medical/image datasets includes rotation, scaling, flipping, color jitter, and cutout. These techniques artificially expand the training set, reduce overfitting, and improve model generalization without collecting more data.",
+      "code": ""
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "What is an AI agent?",
+      "response": "An AI agent is a system that uses a model to decide what actions to take toward a goal. It can combine reasoning with tools, memory, retrieval and external APIs instead of only generating a text response.",
+      "code": null
+    },
+    {
+      "category": "python",
+      "instruction": "[real_world scenario] [Intermediate level] Write Python code to what are decorators and how do they work in python?",
+      "response": "Code review example for [real_world scenario] [intermediate level] write python code to what are decorators and how do they work in python?",
+      "code": ""
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[real_world scenario] [Advanced level] What is What is the difference between monolithic and microservice architecture??",
+      "response": "Microservices architecture structures applications as independently deployable services communicating via APIs/http. Benefits: independent scaling, technology heterogeneity, fault isolation. Challenges: service orchestration, data consistency, distributed monitoring, and inter-service communication complexity.",
+      "code": ""
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[Intermediate level] Explain Create a simple ReAct agent that can use a calculator tool.",
+      "response": "import json\nfrom typing import Optional\n\nclass Tool:\n    name: str\n    description: str\n    func: Optional[callable] = None\n\nclass ReActAgent:\n    def __init__(self, tools=None):\n        self.tools = tools or []\n        self.memory = []\n    \n    def think(self, query: str) -> str:\n        '''Reason about the query and decide on action.'''\n        if any(op in query for op in ['+', '-', '*', '/']):\n            return f'ACTION: calculate({query})'\n        return f'ANSWER: Based on knowledge, {query}'\n    \n    def act(self, action: str) -> str:\n        '''Execute the action and return result.'''\n        if action.startswith('calculate:'):\n            expr = action[len('calculate:'):]\n            try:\n                result = eval(expr)\n                return f'OBSERVATION: {result}'\n            except:\n                return f'OBSERVATION: Error calculating {expr}'\n        return f'OBSERVATION: Not implemented'\n    \n    def run(self, query: str) -> str:\n        '''Run the ReAct loop.'''\n        steps = 0\n        while steps < 10:\n            thought = self.think(query)\n            if thought.startswith('ANSWER:'):\n                return thought[9:].strip()\n            action = self.act(thought)\n            self.memory.append((thought, action))\n            if 'OBSERVATION:' in action:\n                query = action\n            steps += 1\n        return 'Max steps reached'\n\n# Example usage:\n# agent = ReActAgent()\n# result = agent.run('What is 15 * 23?')\n# print(result)",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[Advanced level] What is What are generative adversarial networks (GANs)??",
+      "response": "Generative Adversarial Networks pit a generator against a discriminator in a minimax game: min_G max_D V(D,G) = E[log D(x)] + E[log(1 - D(G(z))]). This adversarial training generates realistic data and improves representation learning.",
+      "code": ""
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[Intermediate level] Explain Explain the SOLID principles with code examples.",
+      "response": "SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion. These design principles improve maintainability, flexibility, and testability of software systems. Widely used in enterprise software design and architecture.",
+      "code": ""
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[Advanced level] What is How do you handle hallucinations in RAG??",
+      "response": "Advanced RAG pipelines include query expansion, context compression, document reranking, and hallucination mitigation. Stages: query preprocessing → retrieval → re-ranking → context compression → answer generation. Significantly improves answer quality and relevance.",
+      "code": ""
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[real_world scenario] [Intermediate level] Write Python code to what is the vanishing gradient problem and how to fix it?",
+      "response": "The vanishing gradient problem occurs when gradients exponentially shrink through deep network layers, hindering training of early layers. Solutions: ReLU/LeakyReLU activation, residual connections (ResNets), layer normalization, and proper weight initialization (He/Xavier).",
+      "code": ""
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[practical scenario] [Beginner level] Write Python code to review this python function for potential bugs and suggest improvements.",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[Intermediate level] Explain Build a basic RAG system with ChromaDB and sentence-transformers.",
+      "response": "import chromadb\nfrom sentence_transformers import SentenceTransformer\n\n# Initialize model and client\nmodel = SentenceTransformer('all-MiniLM-L6-v2')\nclient = chromadb.Client()\n\n# Create collection\ncollection = client.create_collection(name='documents')\n\n# Add documents with embeddings\ndocuments = [\n    'KAI-LLM is a domain-specialized LLM for AI/ML engineering.',\n    'Machine learning is a subset of artificial intelligence.',\n    'Transformers have revolutionized NLP tasks.',\n]\nembeddings = model.encode(documents)\n\ncollection.add(\n    ids=[str(i) for i in range(len(documents))],\n    embeddings=embeddings.tolist(),\n    documents=documents\n)\n\n# Query similar documents\nresults = collection.query(\n    query_embeddings=[model.encode(['What is AI?'])][0],\n    n_results=2\n)\nprint('Retrieved results:', results)",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[real_world scenario] [Beginner level] Write Python code to design a rest api endpoint for user authentication.",
+      "response": "Substantive response about [real_world scenario] [Beginner level] Write Python code to design a rest api endpoint for user authentication. in the backend_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[real_world scenario] [Intermediate level] Explain Analyze the time complexity of this algorithm.",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "What is the purpose of a loss function?",
+      "response": "A loss function measures how different the model's predictions are from the expected targets. Training attempts to minimize this loss by updating the model parameters.",
+      "code": null
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[common_mistakes scenario] [Intermediate level] What is What is context compression in RAG systems??",
+      "response": "Code review example for [common_mistakes scenario] [intermediate level] what is what is context compression in rag systems??",
+      "code": ""
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[practical scenario] [Advanced level] What is Write a middleware for request logging in FastAPI.?",
+      "response": "from fastapi import FastAPI, Request, Response\n\napp = FastAPI()\n\n@app.middleware(\"http\")\nasync def logging_middleware(request: Request, call_next):\n    response = await call_next(request)\n    print(f\"{request.method} {request.url} -> {response.status}\")\n    return response",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[common_mistakes scenario] [Beginner level] Explain What are the key components of a LLM agent architecture?",
+      "response": "Code review example for [common_mistakes scenario] [beginner level] explain what are the key components of a llm agent architecture?",
+      "code": ""
+    },
+    {
+      "category": "software_engineering_coding",
+      "instruction": "[practical scenario] [Beginner level] Write Python code to implement a task queue using redis and celery.",
+      "response": "import redis\nfrom celery import Celery\n\nredis_client = redis.Redis(host='localhost', port=6379, db=0)\napp = Celery('tasks', broker='redis://localhost:6379/0')\n\n@app.task\ndef add(x, y):\n    '''Add two numbers with Redis caching.'''\n    cache_key = f'add:{x}:{y}'\n    cached = redis_client.get(cache_key)\n    if cached:\n        return int(cached)\n    \n    result = x + y\n    redis_client.setex(cache_key, 300, result)\n    return result\n\n# Example usage:\n# result = add.delay(3, 5)\n# print(result.get())",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[Beginner level] Explain Explain the difference between naive RAG and advanced RAG pipelines.",
+      "response": "Naive RAG retrves relevant documents from a vector store and concatenates them with the prompt for the LLM. Limitations: no query optimization, no context compression, no handling of retrieved document quality, and potential hallucination from irrelevant context.",
+      "code": ""
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[Intermediate level] What are best practices for design a rest api endpoint for user authentication.",
+      "response": "Substantive response about [Intermediate level] What are best practices for design a rest api endpoint for user authentication. in the backend_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "Fix this database transaction where partial updates could be committed.",
+      "response": "Related changes should be part of one transaction.\n\nConceptually:\n\ntry:\n    user.balance -= amount\n    receiver.balance += amount\n\n    db.commit()\n\nexcept Exception:\n    db.rollback()\n    raise\n\nEither both balance changes should succeed or the transaction should be rolled back.",
+      "code": "user.balance -= amount\ndb.commit()\n\nreceiver.balance += amount\ndb.commit()"
+    },
+    {
+      "category": "software_engineering_coding",
+      "instruction": "[common_mistakes scenario] [Intermediate level] Write Python code to implement circuit breaker pattern for external service calls.",
+      "response": "Substantive response about [common_mistakes scenario] [Intermediate level] Write Python code to implement circuit breaker pattern for external service calls. in the software_engineering_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[real_world scenario] [Intermediate level] What are best practices for create an endpoint that handles file uploads efficiently.",
+      "response": "Substantive response about [real_world scenario] [Intermediate level] What are best practices for create an endpoint that handles file uploads efficiently. in the backend_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "python",
+      "instruction": "Why should database connections and files be managed with context managers?",
+      "response": "Context managers help guarantee cleanup when execution leaves a block, including when an exception occurs. The with statement is commonly used for files and can also be used with resources such as database connections.",
+      "code": null
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[practical scenario] [Beginner level] Explain Implement a database connection pool using asyncpg.",
+      "response": "import asyncpg\n\nasync def get_db_pool():\n    pool = await asyncpg.create_pool(\n        user='postgres',\n        password='password',\n        host='localhost',\n        database='mydb',\n        min_size=2,\n        max_size=10\n    )\n    return pool",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[practical scenario] [Intermediate level] Explain Create an agent that can select between multiple tools dynamically.",
+      "response": "import json\nfrom typing import Optional\n\nclass Tool:\n    name: str\n    description: str\n    func: Optional[callable] = None\n\nclass ReActAgent:\n    def __init__(self, tools=None):\n        self.tools = tools or []\n        self.memory = []\n    \n    def think(self, query: str) -> str:\n        '''Reason about the query and decide on action.'''\n        if any(op in query for op in ['+', '-', '*', '/']):\n            return f'ACTION: calculate({query})'\n        return f'ANSWER: Based on knowledge, {query}'\n    \n    def act(self, action: str) -> str:\n        '''Execute the action and return result.'''\n        if action.startswith('calculate:'):\n            expr = action[len('calculate:'):]\n            try:\n                result = eval(expr)\n                return f'OBSERVATION: {result}'\n            except:\n                return f'OBSERVATION: Error calculating {expr}'\n        return f'OBSERVATION: Not implemented'\n    \n    def run(self, query: str) -> str:\n        '''Run the ReAct loop.'''\n        steps = 0\n        while steps < 10:\n            thought = self.think(query)\n            if thought.startswith('ANSWER:'):\n                return thought[9:].strip()\n            action = self.act(thought)\n            self.memory.append((thought, action))\n            if 'OBSERVATION:' in action:\n                query = action\n            steps += 1\n        return 'Max steps reached'\n\n# Example usage:\n# agent = ReActAgent()\n# result = agent.run('What is 15 * 23?')\n# print(result)",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "How should Python code handle a file that may not exist?",
+      "response": "Catch FileNotFoundError when absence is an expected condition, or check the workflow so the file is created first. Avoid catching every exception because that can hide unrelated failures.",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "[practical scenario] [Beginner level] What is Train a logistic regression classifier on the Iris dataset.?",
+      "response": "import numpy as np\nfrom sklearn.datasets import load_iris\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\n\ndata = load_iris()\nX, y = data.data, data.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\nmodel = LogisticRegression(max_iter=1000)\nmodel.fit(X_train, y_train)\nscore = model.score(X_test, y_test)\nprint(f'Accuracy: {score:.4f}')",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[Beginner level] Explain What are the key components of a LLM agent architecture?",
+      "response": "Code review example for [beginner level] explain what are the key components of a llm agent architecture?",
+      "code": ""
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "Review this endpoint. The API should return 404 when the user does not exist.",
+      "response": "The endpoint does not explicitly handle a missing user.\n\nA clearer implementation is:\n\nfrom fastapi import HTTPException\n\n@app.get(\"/users/{user_id}\")\ndef get_user(user_id: int):\n    user = database.get(user_id)\n\n    if user is None:\n        raise HTTPException(\n            status_code=404,\n            detail=\"User not found\"\n        )\n\n    return user\n\nThis gives the client an appropriate HTTP response instead of returning an ambiguous null result.",
+      "code": "@app.get(\"/users/{user_id}\")\ndef get_user(user_id: int):\n    user = database.get(user_id)\n    return user\n"
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "My RAG system retrieves related documents but not the exact information needed. How can I improve retrieval?",
+      "response": "Inspect chunking, embedding quality, query formulation and metadata filters. Try adjusting chunk size and overlap, retrieving more candidates, using hybrid retrieval when appropriate, and reranking retrieved candidates before sending the strongest context to the LLM.",
+      "code": null
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[practical scenario] [Beginner level] What is Explain the difference between naive RAG and advanced RAG pipelines.?",
+      "response": "Naive RAG retrves relevant documents from a vector store and concatenates them with the prompt for the LLM. Limitations: no query optimization, no context compression, no handling of retrieved document quality, and potential hallucination from irrelevant context.",
+      "code": ""
+    },
+    {
+      "category": "python_coding",
+      "instruction": "Refactor this nested loop for faster membership lookup.",
+      "response": "Repeatedly scanning blocked_ids can become expensive.\n\nConvert the IDs to a set:\n\nblocked = set(blocked_ids)\n\nfound = [\n    user\n    for user in users\n    if user[\"id\"] in blocked\n]\n\nSet membership is approximately O(1) on average.",
+      "code": "found = []\n\nfor user in users:\n    for blocked_id in blocked_ids:\n        if user[\"id\"] == blocked_id:\n            found.append(user)"
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "[common_mistakes scenario] [Beginner level] What is Write code to compute precision, recall, and F1-score.?",
+      "response": "[common_mistakes scenario] [Beginner level] What is Write code to compute precision, recall, and F1-score.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "python",
+      "instruction": "[real_world scenario] [Advanced level] Write Python code to explain context managers and the `with` statement.",
+      "response": "Code review example for [real_world scenario] [advanced level] write python code to explain context managers and the `with` statement.",
+      "code": ""
+    },
+    {
+      "category": "deep_learning_coding",
+      "instruction": "[Intermediate level] Explain Train a CNN on CIFAR-10 with data augmentation.",
+      "response": "Explanation of [Intermediate level] Explain Train a CNN on CIFAR-10 with data augmentation.: This requires understanding the core concepts, typical use cases, and practical implications within the deep_learning_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "Safely load an image with OpenCV and handle a missing file.",
+      "response": "cv2.imread() returns None when the image cannot be loaded.\n\nCheck it first:\n\nimage = cv2.imread(path)\n\nif image is None:\n    raise FileNotFoundError(\n        f\"Unable to load image: {path}\"\n    )\n\nheight, width = image.shape[:2]",
+      "code": "image = cv2.imread(path)\nheight, width = image.shape[:2]"
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "What is the difference between fine-tuning and RAG?",
+      "response": "Fine-tuning changes model parameters to adapt behavior or task performance. RAG supplies external information at inference time without retraining the model. Frequently changing or private knowledge is often better supplied through retrieval rather than repeatedly fine-tuning the model.",
+      "code": null
+    }
+  ]
+}

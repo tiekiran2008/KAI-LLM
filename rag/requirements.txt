@@ -1,0 +1,9 @@
+# RAG requirements for KAI-LLM Phase 1
+# All core dependencies are typically pre-installed; listed for reproducibility.
+
+chromadb>=0.5.0
+sentence-transformers>=3.0.0
+pypdf>=4.0.0
+
+# Used only by test_retrieval.py to generate a sample PDF
+PyMuPDF>=1.24.0

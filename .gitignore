@@ -1,0 +1,166 @@
+# ============================================================
+# KAI-LLM — .gitignore
+# ============================================================
+
+# Python
+__pycache__/
+*.py[cod]
+*.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual Environments
+venv/
+.venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.keystore
+secrets/
+credentials/
+hf_token*
+*token*.txt
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Model weights, checkpoints, caches
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.gguf
+*.onnx
+*.h5
+checkpoints/
+outputs/
+wandb/
+runs/
+.cache/
+model_cache/
+qlora_output_kai/
+adapter_model.*
+
+# Vector DB runtime data (ChromaDB)
+chroma_db/
+**/chroma_db/
+*.chromadb
+
+# Testing & Linting
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Logs & temporary files
+*.log
+logs/
+tmp/
+temp/
+*.tmp
+*.bak
+
+# OS specific
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Third-party / unrelated to the KAI-LLM release
+java project/
+llama.cpp-src/
+llamacpp/
+
+# Dataset runtime cache
+dataset/.cache/
+
+# One-off dataset development scripts (superseded by dataset/kai_llm_v6.json;
+# kept on disk locally — released tooling is scripts/generator/ and the
+# three Phase-5 scripts below)
+audit_v4.py
+audit_v6.py
+check_code_issues.py
+check_generic.py
+check_parts.py
+cleanup_dataset.py
+cleanup_v4.py
+create_v5.py
+deep_audit.py
+inspect_dataset.py
+merge_final.py
+merge_v6.py
+process_batch.py
+process_batch2.py
+process_part004.py
+process_part005.py
+process_part006.py
+process_part007.py
+process_part008.py
+process_part009.py
+process_part010.py
+process_part011.py
+process_part012.py
+scan_v4.py
+specific_audit.py
+validate_batch3.py
+verify_final.py
+verify_v5.py
+scripts/build_all_generators.py
+scripts/build_all_parts.py
+scripts/build_and_upload.py
+scripts/build_dataset_complete.py
+scripts/build_dataset_master.py
+scripts/build_expansion_dataset.py
+scripts/build_expansion_dataset_final.py
+scripts/build_expansion_runner.py
+scripts/build_full_dataset.py
+scripts/build_generators.py
+scripts/build_kai_dataset.py
+scripts/create_dataset_final.py
+scripts/generate_all.py
+scripts/generate_complete_dataset.py
+scripts/make_dataset_files.py
+scripts/populate_generators.py
+scripts/run_dataset_pipeline.py
+scripts/write_backend.py
+scripts/write_modules.py
+
+# Superseded intermediate datasets (final audited dataset is kai_llm_v6.json)
+dataset/kai_llm_v1.json
+dataset/kai_llm_v2.json
+dataset/kai_llm_v3.json
+dataset/kai_llm_v4.json
+dataset/kai_llm_v5.json
+dataset/v5_audit_report.txt

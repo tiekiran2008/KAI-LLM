@@ -1,0 +1,38 @@
+# ============================================================
+# KAI-LLM V3 — consolidated dependencies
+# Python 3.11 tested. Install:  pip install -r requirements.txt
+# ============================================================
+
+# --- API (FastAPI backend) ---
+fastapi>=0.115.0
+uvicorn>=0.30.0
+python-multipart>=0.0.9
+httpx>=0.27.0
+
+# --- Agents (LangGraph workflow) ---
+langgraph>=1.1.0
+
+# --- RAG (ChromaDB + sentence-transformers) ---
+chromadb>=0.5.0
+sentence-transformers>=3.0.0
+pypdf>=4.0.0
+PyMuPDF>=1.24.0
+
+# --- Memory (Supabase / PostgreSQL + pgvector) ---
+supabase>=2.31.0
+numpy>=2.0.0
+python-dotenv>=1.0.0
+
+# --- Testing ---
+pytest>=8.0.0
+
+# --- Local V3 inference (OPTIONAL, ~3-4 GB RAM at runtime) -----
+# Uncomment only if you run with KAI_API_MODE=local_adapter.
+# torch
+# transformers
+# peft
+# trl
+# bitsandbytes
+
+# Training-only dependencies (Colab / GPU) are pinned separately
+# in training/requirements.txt.

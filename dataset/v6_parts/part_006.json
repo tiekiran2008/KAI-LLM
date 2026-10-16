@@ -1,0 +1,607 @@
+{
+  "part": 6,
+  "start_index": 500,
+  "end_index": 599,
+  "examples": [
+    {
+      "category": "ml_coding",
+      "instruction": "How should class imbalance be handled in a classification project?",
+      "response": "First measure the imbalance and choose suitable metrics. Depending on the problem, options include class weighting, resampling, threshold tuning and collecting more representative data.",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[practical scenario] [Beginner level] Compare and contrast: What are the key components of a LLM agent architecture?",
+      "response": "AI agents are LLM-powered systems that can reason, act, and observe to accomplish goals. Key components: reasoning/thought module, tool-use capability, memory/history, and action execution. Applications: autonomous research, coding assistants, and multi-step task completion.",
+      "code": "class ReActAgent:\n    def __init__(self):\n        self.tools = []\n        self.memory = []\n    def run(self, query):\n        return \"Agent running...\"\n"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[common_mistakes scenario] [Intermediate level] What are best practices for review this python function for potential bugs and suggest improvements.",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "[Advanced level] Write Python code to implement a generator that yields fibonacci numbers.",
+      "response": "def fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b\n\n# Example usage:\nfor num in fibonacci(10):\n    print(num)",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "Fix this PyTorch device mismatch.",
+      "response": "Move the batch to the same device:\n\ndevice = torch.device(\n    \"cuda\" if torch.cuda.is_available() else \"cpu\"\n)\n\nmodel = model.to(device)\n\nfor images, labels in loader:\n    images = images.to(device)\n    labels = labels.to(device)\n\n    outputs = model(images)\n\nModel parameters and input tensors must use compatible devices.",
+      "code": "device = \"cuda\"\n\nmodel.to(device)\n\nfor images, labels in loader:\n    outputs = model(images)"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "[real_world scenario] [Advanced level] What are best practices for implement a generator that yields fibonacci numbers.",
+      "response": "def fibonacci(n):\n    a, b = 0, 1\n    for _ in range(n):\n        yield a\n        a, b = b, a + b\n\n# Example usage:\nfor num in fibonacci(10):\n    print(num)",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "[common_mistakes scenario] [Advanced level] What are best practices for explain data augmentation for small medical image datasets.",
+      "response": "Data augmentation for small medical/image datasets includes rotation, scaling, flipping, color jitter, and cutout. These techniques artificially expand the training set, reduce overfitting, and improve model generalization without collecting more data.",
+      "code": ""
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "[real_world scenario] [Advanced level] Write Python code to implement k-means clustering from scratch.",
+      "response": "import numpy as np\nfrom sklearn.datasets import make_blobs\nfrom sklearn.cluster import KMeans\n\nX, _ = make_blobs(n_samples=300, centers=4, random_state=42)\nkmeans = KMeans(n_clusters=4, random_state=42)\nkmeans.fit(X)\n\nprint(f'Cluster centers shape: {kmeans.cluster_centers_.shape}')\nprint(f'Labels: {kmeans.labels_[:10]}')",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[practical scenario] [Advanced level] Explain Implement a response generator that uses retrieved context.",
+      "response": "Explanation of [practical scenario] [Advanced level] Explain Implement a response generator that uses retrieved context.: This requires understanding the core concepts, typical use cases, and practical implications within the rag_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[Intermediate level] What are best practices for what is reinforcement learning and how does it differ from supervised learning?",
+      "response": "Reinforcement learning trains agents to maximize cumulative reward via trial-and-error interactions with an environment. Key components: policy, value function, and reward signal. Example: Q-learning updates Q(s,a) := Q(s,a) + Î±[r + Î³Â·max_a'Q(s',a') - Q(s,a)].",
+      "code": ""
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[real_world scenario] [Beginner level] Write Python code to implement object detection inference with yolov8.",
+      "response": "Substantive response about [real_world scenario] [Beginner level] Write Python code to implement object detection inference with yolov8. in the computer_vision_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "Find the bug caused by using a mutable default argument.",
+      "response": "The same list is reused across function calls because default arguments are created when the function is defined.\n\nUse None:\n\ndef add_item(item, items=None):\n    if items is None:\n        items = []\n\n    items.append(item)\n    return items\n\nNow each call gets a new list unless a list is explicitly provided.",
+      "code": "def add_item(item, items=[]):\n    items.append(item)\n    return items"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[common_mistakes scenario] [Advanced level] What are best practices for explain react pattern (reasoning + acting).",
+      "response": "ReAct (Reasoning+Act) pattern combines thought/action loops: think (reason about query), act (execute tool/calculate), observe (get result), repeat. This enables autonomous agents to handle math, search, and multi-step reasoning with transparency via the thought trace.",
+      "code": ""
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[practical scenario] [Advanced level] What are best practices for what are common failure modes of autonomous agents?",
+      "response": "AI agents are LLM-powered systems that can reason, act, and observe to accomplish goals. Key components: reasoning/thought module, tool-use capability, memory/history, and action execution. Applications: autonomous research, coding assistants, and multi-step task completion.",
+      "code": "class ReActAgent:\n    def __init__(self):\n        self.tools = []\n        self.memory = []\n    def run(self, query):\n        return \"Agent running...\"\n"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[real_world scenario] [Advanced level] What are best practices for suggest optimizations for this database query pattern.",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "[practical scenario] [Beginner level] What are best practices for write a decorator that measures function execution time.",
+      "response": "def timer_decorator(func):\n    import time\n    def wrapper(*args, **kwargs):\n        start = time.time()\n        result = func(*args, **kwargs)\n        end = time.time()\n        print(f\"{func.__name__} executed in {end-start:.4f}s\")\n        return result\n    return wrapper\n\n@timer_decorator\ndef slow_function():\n    import time\n    time.sleep(0.5)\n    return \"done\"\n\n# Example usage:\nslow_function()",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "python",
+      "instruction": "[real_world scenario] [Intermediate level] Explain What are Python descriptors and how are they used?",
+      "response": "Python is an interpreted, object-oriented language with dynamic typing, dynamic binding, and high-level data structures. Key features: concise syntax, extensive standard library, third-party packages (PyPI), and readability emphasis (significant whitespace).",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "What is YOLO used for?",
+      "response": "YOLO is a family of real-time object detection models. It can locate and classify multiple objects in an image or video, making it useful for applications such as manufacturing inspection, traffic monitoring and safety systems.",
+      "code": null
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "What is RAG?",
+      "response": "Retrieval-Augmented Generation retrieves relevant information from an external knowledge source and provides it to an LLM as context before generation. This allows the model to answer using information that does not need to be stored in its trained parameters.",
+      "code": null
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "[practical scenario] [Beginner level] Write Python code to train a logistic regression classifier on the iris dataset.",
+      "response": "import numpy as np\nfrom sklearn.datasets import load_iris\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\n\ndata = load_iris()\nX, y = data.data, data.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\nmodel = LogisticRegression(max_iter=1000)\nmodel.fit(X_train, y_train)\nscore = model.score(X_test, y_test)\nprint(f'Accuracy: {score:.4f}')",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[Advanced level] What are best practices for write code to compute iou between two bounding boxes.",
+      "response": "def calculate_iou(box1, box2):\n    '''Calculate Intersection over Union (IoU) of two bounding boxes.'''\n    x1 = max(box1[0], box2[0])\n    y1 = max(box1[1], box2[1])\n    x2 = min(box1[2], box2[2])\n    y2 = min(box1[3], box2[3])\n    \n    intersection = max(0, x2 - x1) * max(0, y2 - y1)\n    \n    box1_area = (box1[2] - box1[0]) * (box1[3] - box1[1])\n    box2_area = (box2[2] - box2[0]) * (box2[3] - box2[1])\n    \n    union = box1_area + box2_area - intersection\n    \n    return intersection / union if union > 0 else 0\n\n# Example usage:\nbox_a = [0, 0, 10, 10]\nbox_b = [5, 5, 15, 15]\nprint(f'Iou: {calculate_iou(box_a, box_b):.4f}')",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "[practical scenario] [Intermediate level] Write Python code to write a function to find the k-th largest element in an array.",
+      "response": "def find_kth_largest(nums, k):\n    nums.sort(reverse=True)\n    return nums[k-1]\n\n# Example usage:\nresult = find_kth_largest([3, 1, 4, 1, 5, 9, 2, 6], 3)\nprint(f\"{k}-th largest: {result}\")",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "What is the role of a supervisor agent?",
+      "response": "A supervisor agent or orchestration layer decides which specialized agent should handle a task and how the workflow should proceed. It can also combine results and determine whether additional steps are needed.",
+      "code": null
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "What happens during forward propagation?",
+      "response": "During forward propagation, input data passes through the network layer by layer. Each layer performs mathematical operations using its weights, biases and activation functions until the model produces a prediction.",
+      "code": null
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[real_world scenario] [Intermediate level] Compare and contrast: Review this Python function for potential bugs and suggest improvements.",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[Intermediate level] What is Write code to retrieve top-k relevant documents for a query.?",
+      "response": "[Intermediate level] What is Write code to retrieve top-k relevant documents for a query.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "Review and fix this SQL query construction.",
+      "response": "User-controlled values should not be concatenated into SQL.\n\nUse parameters:\n\ncursor.execute(\n    \"SELECT * FROM users WHERE id = %s\",\n    (user_id,)\n)\n\nParameterized queries separate SQL syntax from values and help prevent SQL injection.",
+      "code": "query = (\n    \"SELECT * FROM users WHERE id = \"\n    + user_id\n)\n\ncursor.execute(query)"
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "[real_world scenario] [Advanced level] What is Explain data augmentation for small medical image datasets.?",
+      "response": "Data augmentation for small medical/image datasets includes rotation, scaling, flipping, color jitter, and cutout. These techniques artificially expand the training set, reduce overfitting, and improve model generalization without collecting more data.",
+      "code": ""
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "Fix image inference code that forgets the batch dimension.",
+      "response": "Most vision models expect a batch dimension:\n\nimage = transform(image)\nimage = image.unsqueeze(0)\n\nwith torch.no_grad():\n    output = model(image)\n\nThe tensor changes from C,H,W to 1,C,H,W.",
+      "code": "image = transform(image)\noutput = model(image)"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[real_world scenario] [Advanced level] What are best practices for implement a response generator that uses retrieved context.",
+      "response": "Substantive response about [real_world scenario] [Advanced level] What are best practices for implement a response generator that uses retrieved context. in the rag_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[Intermediate level] Compare and contrast: Explain transfer learning and when to use it.",
+      "response": "Transfer learning leverages pretrained model weights on source task to improve performance on target task. Common approaches: fine-tuning, feature extraction, and domain adaptation. Particularly effective when target task has limited data.",
+      "code": ""
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[practical scenario] [Advanced level] Explain Explain continuous integration and deployment pipelines.",
+      "response": "Software engineering applies systematic, disciplined approaches to software development, operation, and maintenance. Encompasses: requirements engineering, design patterns, testing strategies, configuration management, and process improvement (Agile, Scrum, DevOps).",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[real_world scenario] [Beginner level] What are best practices for write code for an agent that maintains conversation history.",
+      "response": "Substantive response about [real_world scenario] [Beginner level] What are best practices for write code for an agent that maintains conversation history. in the agent_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "How should a reviewer handle an apparent security issue with insufficient context?",
+      "response": "Report the concrete risky pattern and explain the missing context needed to determine impact. Avoid claiming a confirmed vulnerability when the available evidence does not establish one.",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[Beginner level] Explain What is reinforcement learning and how does it differ from supervised learning?",
+      "response": "Reinforcement learning trains agents to maximize cumulative reward via trial-and-error interactions with an environment. Key components: policy, value function, and reward signal. Example: Q-learning updates Q(s,a) := Q(s,a) + Î±[r + Î³Â·max_a'Q(s',a') - Q(s,a)].",
+      "code": ""
+    },
+    {
+      "category": "python_coding",
+      "instruction": "[practical scenario] [Advanced level] What is Implement a binary search algorithm in Python.?",
+      "response": "def binary_search(arr, target):\n    left, right = 0, len(arr) - 1\n    while left <= right:\n        mid = (left + right) // 2\n        if arr[mid] == target:\n            return mid\n        elif arr[mid] < target:\n            left = mid + 1\n        else:\n            right = mid - 1\n    return -1\n\n# Example usage:\nresult = binary_search([1, 2, 3, 4, 5], 3)\nprint(f\"Index: {result}\")",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "Review this function that returns different data types depending on failure.",
+      "response": "Returning a string where callers normally expect a numeric score makes the interface harder to use safely.\n\nChoose a consistent contract. For example, raise a specific exception:\n\ndef get_score(user):\n    if user is None:\n        raise ValueError(\n            \"User is required\"\n        )\n\n    return calculate_score(user)\n\nAlternatively, return an explicit result type when failures are expected domain outcomes.",
+      "code": "def get_score(user):\n    if not user:\n        return \"error\"\n\n    return calculate_score(user)"
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "[real_world scenario] [Intermediate level] Write Python code to train a logistic regression classifier on the iris dataset.",
+      "response": "import numpy as np\nfrom sklearn.datasets import load_iris\nfrom sklearn.linear_model import LogisticRegression\nfrom sklearn.model_selection import train_test_split\n\ndata = load_iris()\nX, y = data.data, data.target\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\nmodel = LogisticRegression(max_iter=1000)\nmodel.fit(X_train, y_train)\nscore = model.score(X_test, y_test)\nprint(f'Accuracy: {score:.4f}')",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "software_engineering_coding",
+      "instruction": "[Beginner level] What is Create an API versioning strategy implementation.?",
+      "response": "[Beginner level] What is Create an API versioning strategy implementation.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "[practical scenario] [Intermediate level] Compare and contrast: What is the difference between image classification and object detection?",
+      "response": "Computer vision enables machines to interpret and understand digital images/video. Key tasks: image classification, object detection, semantic segmentation, instance segmentation, and image generation. CNNs and transformers are dominant architectures.",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[common_mistakes scenario] [Intermediate level] What is Analyze the time complexity of this algorithm.?",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "[real_world scenario] [Beginner level] What are best practices for what is u-net architecture and its typical use cases?",
+      "response": "Computer vision enables machines to interpret and understand digital images/video. Key tasks: image classification, object detection, semantic segmentation, instance segmentation, and image generation. CNNs and transformers are dominant architectures.",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "python",
+      "instruction": "What is the purpose of type hints in Python?",
+      "response": "Type hints document the expected types of variables, parameters and return values. They improve readability and allow static-analysis tools and IDEs to detect some mistakes before runtime, although Python does not enforce most type hints automatically.",
+      "code": null
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[real_world scenario] [Beginner level] Write Python code to what are the key components of a llm agent architecture?",
+      "response": "AI agents are LLM-powered systems that can reason, act, and observe to accomplish goals. Key components: reasoning/thought module, tool-use capability, memory/history, and action execution. Applications: autonomous research, coding assistants, and multi-step task completion.",
+      "code": "class ReActAgent:\n    def __init__(self):\n        self.tools = []\n        self.memory = []\n    def run(self, query):\n        return \"Agent running...\"\n"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[practical scenario] [Beginner level] What is What is the vanishing gradient problem and how to fix it??",
+      "response": "The vanishing gradient problem occurs when gradients exponentially shrink through deep network layers, hindering training of early layers. Solutions: ReLU/LeakyReLU activation, residual connections (ResNets), layer normalization, and proper weight initialization (He/Xavier).",
+      "code": ""
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "Why should I save a trained model checkpoint?",
+      "response": "A checkpoint lets you preserve training progress and reuse the model later without starting from zero. Depending on the goal, it can contain model weights and also optimizer, scheduler and training-state information needed to resume training.",
+      "code": null
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[Advanced level] Compare and contrast: Explain continuous integration and deployment pipelines.",
+      "response": "Software engineering applies systematic, disciplined approaches to software development, operation, and maintenance. Encompasses: requirements engineering, design patterns, testing strategies, configuration management, and process improvement (Agile, Scrum, DevOps).",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[Beginner level] Explain Implement object detection inference with YOLOv8.",
+      "response": "Explanation of [Beginner level] Explain Implement object detection inference with YOLOv8.: This requires understanding the core concepts, typical use cases, and practical implications within the computer_vision_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "python_coding",
+      "instruction": "Explain how to debug a Python IndexError in a loop.",
+      "response": "Check the list length, inspect the index being accessed, and verify loop boundaries. A common mistake is using range(len(items) + 1) instead of range(len(items)).",
+      "code": "def f(n): yield from [0]"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[practical scenario] [Advanced level] What are best practices for what are generative adversarial networks (gans)?",
+      "response": "Generative Adversarial Networks pit a generator against a discriminator in a minimax game: min_G max_D V(D,G) = E[log D(x)] + E[log(1 - D(G(z))]). This adversarial training generates realistic data and improves representation learning.",
+      "code": ""
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[Beginner level] Compare and contrast: What are kernel methods and when are they useful?",
+      "response": "Kernel methods enable learning in high-dimensional spaces via kernel tricks (e.g., RBF kernel k(x,y) = exp(-Î³||x-y||Â²)). They implicitly map data to higher dimensions without explicit coordinates, useful for SVMs and beyond.",
+      "code": ""
+    },
+    {
+      "category": "ai_agents",
+      "instruction": "[Advanced level] Compare and contrast: What are common failure modes of autonomous agents?",
+      "response": "AI agents are LLM-powered systems that can reason, act, and observe to accomplish goals. Key components: reasoning/thought module, tool-use capability, memory/history, and action execution. Applications: autonomous research, coding assistants, and multi-step task completion.",
+      "code": "class ReActAgent:\n    def __init__(self):\n        self.tools = []\n        self.memory = []\n    def run(self, query):\n        return \"Agent running...\"\n"
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "What does a CNN learn from an image?",
+      "response": "A CNN learns visual patterns through filters. Earlier layers often respond to simple patterns such as edges and textures, while deeper layers can represent more complex shapes and object-related features.",
+      "code": null
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[Advanced level] Compare and contrast: Implement a base agent class with tool-calling infrastructure.",
+      "response": "import json\nfrom typing import Optional\n\nclass Tool:\n    name: str\n    description: str\n    func: Optional[callable] = None\n\nclass ReActAgent:\n    def __init__(self, tools=None):\n        self.tools = tools or []\n        self.memory = []\n    \n    def think(self, query: str) -> str:\n        '''Reason about the query and decide on action.'''\n        if any(op in query for op in ['+', '-', '*', '/']):\n            return f'ACTION: calculate({query})'\n        return f'ANSWER: Based on knowledge, {query}'\n    \n    def act(self, action: str) -> str:\n        '''Execute the action and return result.'''\n        if action.startswith('calculate:'):\n            expr = action[len('calculate:'):]\n            try:\n                result = eval(expr)\n                return f'OBSERVATION: {result}'\n            except:\n                return f'OBSERVATION: Error calculating {expr}'\n        return f'OBSERVATION: Not implemented'\n    \n    def run(self, query: str) -> str:\n        '''Run the ReAct loop.'''\n        steps = 0\n        while steps < 10:\n            thought = self.think(query)\n            if thought.startswith('ANSWER:'):\n                return thought[9:].strip()\n            action = self.act(thought)\n            self.memory.append((thought, action))\n            if 'OBSERVATION:' in action:\n                query = action\n            steps += 1\n        return 'Max steps reached'\n\n# Example usage:\n# agent = ReActAgent()\n# result = agent.run('What is 15 * 23?')\n# print(result)",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[common_mistakes scenario] [Advanced level] Write Python code to explain continuous integration and deployment pipelines.",
+      "response": "Software engineering applies systematic, disciplined approaches to software development, operation, and maintenance. Encompasses: requirements engineering, design patterns, testing strategies, configuration management, and process improvement (Agile, Scrum, DevOps).",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "Prepare an image batch for GPU inference in PyTorch.",
+      "response": "Move both the model and tensors to the selected device:\n\ndevice = torch.device(\n    \"cuda\" if torch.cuda.is_available()\n    else \"cpu\"\n)\n\nmodel = model.to(device)\nimages = images.float().to(device)\n\nmodel.eval()\n\nwith torch.no_grad():\n    outputs = model(images)",
+      "code": "images = images.float()\noutputs = model(images)"
+    },
+    {
+      "category": "python",
+      "instruction": "[Intermediate level] Compare and contrast: What are Python descriptors and how are they used?",
+      "response": "Python is an interpreted, object-oriented language with dynamic typing, dynamic binding, and high-level data structures. Key features: concise syntax, extensive standard library, third-party packages (PyPI), and readability emphasis (significant whitespace).",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[real_world scenario] [Advanced level] Compare and contrast: What are embedding models and how are they evaluated?",
+      "response": "Advanced RAG pipelines include query expansion, context compression, document reranking, and hallucination mitigation. Stages: query preprocessing â†’ retrieval â†’ re-ranking â†’ context compression â†’ answer generation. Significantly improves answer quality and relevance.",
+      "code": ""
+    },
+    {
+      "category": "python_coding",
+      "instruction": "Refactor this repeated validation logic into a reusable function.",
+      "response": "Extract the shared rule:\n\ndef require_text(value, field_name):\n    if value is None or not value.strip():\n        raise ValueError(f\"Invalid {field_name}\")\n    return value\n\nname = require_text(name, \"name\")\ncity = require_text(city, \"city\")\n\nThis centralizes the validation behavior.",
+      "code": "if name is None or name == \"\":\n    raise ValueError(\"Invalid name\")\n\nif city is None or city == \"\":\n    raise ValueError(\"Invalid city\")"
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[common_mistakes scenario] [Advanced level] Explain What is the difference between monolithic and microservice architecture?",
+      "response": "Microservices architecture structures applications as independently deployable services communicating via APIs/http. Benefits: independent scaling, technology heterogeneity, fault isolation. Challenges: service orchestration, data consistency, distributed monitoring, and inter-service communication complexity.",
+      "code": ""
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[practical scenario] [Intermediate level] Compare and contrast: Create a simple ReAct agent that can use a calculator tool.",
+      "response": "import json\nfrom typing import Optional\n\nclass Tool:\n    name: str\n    description: str\n    func: Optional[callable] = None\n\nclass ReActAgent:\n    def __init__(self, tools=None):\n        self.tools = tools or []\n        self.memory = []\n    \n    def think(self, query: str) -> str:\n        '''Reason about the query and decide on action.'''\n        if any(op in query for op in ['+', '-', '*', '/']):\n            return f'ACTION: calculate({query})'\n        return f'ANSWER: Based on knowledge, {query}'\n    \n    def act(self, action: str) -> str:\n        '''Execute the action and return result.'''\n        if action.startswith('calculate:'):\n            expr = action[len('calculate:'):]\n            try:\n                result = eval(expr)\n                return f'OBSERVATION: {result}'\n            except:\n                return f'OBSERVATION: Error calculating {expr}'\n        return f'OBSERVATION: Not implemented'\n    \n    def run(self, query: str) -> str:\n        '''Run the ReAct loop.'''\n        steps = 0\n        while steps < 10:\n            thought = self.think(query)\n            if thought.startswith('ANSWER:'):\n                return thought[9:].strip()\n            action = self.act(thought)\n            self.memory.append((thought, action))\n            if 'OBSERVATION:' in action:\n                query = action\n            steps += 1\n        return 'Max steps reached'\n\n# Example usage:\n# agent = ReActAgent()\n# result = agent.run('What is 15 * 23?')\n# print(result)",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[real_world scenario] [Intermediate level] Compare and contrast: Create a simple ReAct agent that can use a calculator tool.",
+      "response": "import json\nfrom typing import Optional\n\nclass Tool:\n    name: str\n    description: str\n    func: Optional[callable] = None\n\nclass ReActAgent:\n    def __init__(self, tools=None):\n        self.tools = tools or []\n        self.memory = []\n    \n    def think(self, query: str) -> str:\n        '''Reason about the query and decide on action.'''\n        if any(op in query for op in ['+', '-', '*', '/']):\n            return f'ACTION: calculate({query})'\n        return f'ANSWER: Based on knowledge, {query}'\n    \n    def act(self, action: str) -> str:\n        '''Execute the action and return result.'''\n        if action.startswith('calculate:'):\n            expr = action[len('calculate:'):]\n            try:\n                result = eval(expr)\n                return f'OBSERVATION: {result}'\n            except:\n                return f'OBSERVATION: Error calculating {expr}'\n        return f'OBSERVATION: Not implemented'\n    \n    def run(self, query: str) -> str:\n        '''Run the ReAct loop.'''\n        steps = 0\n        while steps < 10:\n            thought = self.think(query)\n            if thought.startswith('ANSWER:'):\n                return thought[9:].strip()\n            action = self.act(thought)\n            self.memory.append((thought, action))\n            if 'OBSERVATION:' in action:\n                query = action\n            steps += 1\n        return 'Max steps reached'\n\n# Example usage:\n# agent = ReActAgent()\n# result = agent.run('What is 15 * 23?')\n# print(result)",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "deep_learning_coding",
+      "instruction": "Calculate multiclass predictions from raw logits.",
+      "response": "Take the index of the largest logit:\n\npredictions = logits.argmax(\n    dim=1\n)\n\nNo softmax is required when only the predicted class is needed because softmax preserves the ordering of logits.",
+      "code": "logits = model(images)"
+    },
+    {
+      "category": "machine_learning",
+      "instruction": "[practical scenario] [Intermediate level] Compare and contrast: What is reinforcement learning and how does it differ from supervised learning?",
+      "response": "Reinforcement learning trains agents to maximize cumulative reward via trial-and-error interactions with an environment. Key components: policy, value function, and reward signal. Example: Q-learning updates Q(s,a) := Q(s,a) + Î±[r + Î³Â·max_a'Q(s',a') - Q(s,a)].",
+      "code": ""
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[practical scenario] [Beginner level] Compare and contrast: Implement object detection inference with YOLOv8.",
+      "response": "Comparison of related concepts in [practical scenario] [Beginner level] Compare and contrast: Implement object detection inference with YOLOv8.: Each has distinct characteristics, use cases, and tradeoffs. The specific differences depend on the context and application requirements.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[practical scenario] [Intermediate level] What are best practices for write code to retrieve top-k relevant documents for a query.",
+      "response": "Substantive response about [practical scenario] [Intermediate level] What are best practices for write code to retrieve top-k relevant documents for a query. in the rag_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[Intermediate level] What is Explain attention mechanism in neural networks.?",
+      "response": "Attention mechanism computes weighted focus over input sequences: Attention(Q,K,V) = softmax(QKáµ€/âˆšd)Â·V. It enables transformers to capture long-range dependencies without recurrence, revolutionizing NLP and vision.",
+      "code": ""
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "What does backpropagation do?",
+      "response": "Backpropagation calculates how much each trainable parameter contributed to the prediction error. These gradients are then used by an optimizer to update the parameters and reduce the loss.",
+      "code": null
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[Intermediate level] What are best practices for what is the vanishing gradient problem and how to fix it?",
+      "response": "The vanishing gradient problem occurs when gradients exponentially shrink through deep network layers, hindering training of early layers. Solutions: ReLU/LeakyReLU activation, residual connections (ResNets), layer normalization, and proper weight initialization (He/Xavier).",
+      "code": ""
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[practical scenario] [Advanced level] Compare and contrast: Identify security vulnerabilities in this FastAPI endpoint.",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "Why should code review distinguish correctness issues from style suggestions?",
+      "response": "They have different severity and impact. Separating them helps developers prioritize defects and security problems without treating optional formatting preferences as equivalent.",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "python",
+      "instruction": "How do you check whether an integer is even in Python?",
+      "response": "Use the modulo operator. An integer is even when number % 2 == 0 because division by 2 leaves no remainder.",
+      "code": null
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[common_mistakes scenario] [Intermediate level] Write Python code to explain attention mechanism in neural networks.",
+      "response": "Attention mechanism computes weighted focus over input sequences: Attention(Q,K,V) = softmax(QKáµ€/âˆšd)Â·V. It enables transformers to capture long-range dependencies without recurrence, revolutionizing NLP and vision.",
+      "code": ""
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "[common_mistakes scenario] [Beginner level] Explain What is the difference between image classification and object detection?",
+      "response": "Computer vision enables machines to interpret and understand digital images/video. Key tasks: image classification, object detection, semantic segmentation, instance segmentation, and image generation. CNNs and transformers are dominant architectures.",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[common_mistakes scenario] [Advanced level] What is Implement a response generator that uses retrieved context.?",
+      "response": "[common_mistakes scenario] [Advanced level] What is Implement a response generator that uses retrieved context.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "software_engineering_coding",
+      "instruction": "[practical scenario] [Advanced level] What are best practices for write code for canary deployment strategy.",
+      "response": "Substantive response about [practical scenario] [Advanced level] What are best practices for write code for canary deployment strategy. in the software_engineering_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[practical scenario] [Advanced level] Compare and contrast: Explain Residual Networks (ResNets) and why they help.",
+      "response": "Residual Networks (ResNets) use skip connections that add layer input to output: y = F(x) + x. This enables training of very deep networks (100+ layers) by mitigating vanishing gradients and facilitating optimization.",
+      "code": ""
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[common_mistakes scenario] [Intermediate level] Explain Design a REST API endpoint for user authentication.",
+      "response": "Explanation of [common_mistakes scenario] [Intermediate level] Explain Design a REST API endpoint for user authentication.: This requires understanding the core concepts, typical use cases, and practical implications within the backend_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "deep_learning_coding",
+      "instruction": "[practical scenario] [Beginner level] Explain Write code for positional encoding in a transformer.",
+      "response": "Explanation of [practical scenario] [Beginner level] Explain Write code for positional encoding in a transformer.: This requires understanding the core concepts, typical use cases, and practical implications within the deep_learning_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[practical scenario] [Intermediate level] Write Python code to review this python function for potential bugs and suggest improvements.",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "Why should random_state be specified when comparing scikit-learn experiments?",
+      "response": "Without a fixed random seed, different runs may create different train/test splits. That makes experiments harder to reproduce and compare.\n\nFor example:\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42\n)\n\nA fixed seed improves reproducibility, although complete reproducibility can require controlling randomness in other libraries and hardware operations too.",
+      "code": "X_train, X_test, y_train, y_test = train_test_split(\n    X, y,\n    test_size=0.2\n)"
+    },
+    {
+      "category": "deep_learning",
+      "instruction": "[Intermediate level] Explain What is the vanishing gradient problem and how to fix it?",
+      "response": "The vanishing gradient problem occurs when gradients exponentially shrink through deep network layers, hindering training of early layers. Solutions: ReLU/LeakyReLU activation, residual connections (ResNets), layer normalization, and proper weight initialization (He/Xavier).",
+      "code": ""
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "Fix the data leakage in this scikit-learn preprocessing code.",
+      "response": "Split before fitting preprocessing:\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X,\n    y,\n    test_size=0.2,\n    random_state=42\n)\n\nscaler = StandardScaler()\n\nX_train = scaler.fit_transform(X_train)\nX_test = scaler.transform(X_test)\n\nThe test set must not influence the scaler's learned statistics.",
+      "code": "scaler = StandardScaler()\nX = scaler.fit_transform(X)\n\nX_train, X_test, y_train, y_test = train_test_split(\n    X, y\n)"
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "Why is evaluating a machine learning model on the same data used for training unreliable?",
+      "response": "Training performance measures how well the model fits examples it has already seen. It does not reliably measure generalization to unseen data.\n\nEvaluate using separate validation or test data:\n\nmodel.fit(X_train, y_train)\nscore = model.score(X_test, y_test)\n\nValidation data can guide model development, while a held-out test set should be reserved for final evaluation.",
+      "code": "model.fit(X_train, y_train)\nscore = model.score(X_train, y_train)"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[Advanced level] What is Write code to visualize feature maps from a CNN.?",
+      "response": "[Advanced level] What is Write code to visualize feature maps from a CNN.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "code_review_coding",
+      "instruction": "[practical scenario] [Advanced level] What is Identify security vulnerabilities in this FastAPI endpoint.?",
+      "response": "def review_code(code: str) -> list:\n    '''Review Python code for common issues.'''\n    issues = []\n    lines = code.split('\n')\n    \n    for i, line in enumerate(lines, 1):\n        if 'bare except:' in line:\n            issues.append(f'Line {i}: Bare except clause - too broad')\n        if re.search(r'\b\\d{2,}\b', line) and 'range' not in line.lower():\n            issues.append(f'Line {i}: Potential magic number')\n    \n    return issues\n\n# Example usage:\ncode = '''\ndef process(data):\n    try:\n        result = 1 / data\n    except:\n        pass\n'''\nissues = review_code(code)\nprint(f'Issues found: {issues}')",
+      "code": "import re; def r(c): return []"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "[common_mistakes scenario] [Beginner level] What are best practices for implement object detection inference with yolov8.",
+      "response": "Substantive response about [common_mistakes scenario] [Beginner level] What are best practices for implement object detection inference with yolov8. in the computer_vision_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "deep_learning_coding",
+      "instruction": "[real_world scenario] [Advanced level] Explain Implement learning rate scheduling from scratch.",
+      "response": "Explanation of [real_world scenario] [Advanced level] Explain Implement learning rate scheduling from scratch.: This requires understanding the core concepts, typical use cases, and practical implications within the deep_learning_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "software_engineering",
+      "instruction": "[real_world scenario] [Intermediate level] What is Explain the SOLID principles with code examples.?",
+      "response": "SOLID principles: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion. These design principles improve maintainability, flexibility, and testability of software systems. Widely used in enterprise software design and architecture.",
+      "code": ""
+    },
+    {
+      "category": "ml_coding",
+      "instruction": "[real_world scenario] [Beginner level] What are best practices for write code to compute precision, recall, and f1-score.",
+      "response": "Substantive response about [real_world scenario] [Beginner level] What are best practices for write code to compute precision, recall, and f1-score. in the ml_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "from sklearn.linear_model import LogisticRegression"
+    },
+    {
+      "category": "deep_learning_coding",
+      "instruction": "[practical scenario] [Advanced level] What is Implement a transformer block from scratch using PyTorch.?",
+      "response": "import torch\nimport torch.nn as nn\n\nclass TransformerBlock(nn.Module):\n    def __init__(self, dim, n_heads, dim_head=64):\n        super().__init__()\n        self.attention = nn.MultiheadAttention(dim, n_heads)\n        self.norm1 = nn.LayerNorm(dim)\n        self.norm2 = nn.LayerNorm(dim)\n        self.ff = nn.Sequential(\n            nn.Linear(dim, dim * 4),\n            nn.GELU(),\n            nn.Linear(dim * 4, dim)\n        )\n    \n    def forward(self, x):\n        attn_out, _ = self.attention(x, x, x)\n        x = self.norm1(x + attn_out)\n        ff_out = self.ff(x)\n        x = self.norm2(x + ff_out)\n        return x\n\n# Example usage:\n# block = TransformerBlock(dim=512, n_heads=8)\n# x = torch.randn(1, 10, 512)\n# output = block(x)",
+      "code": "def iou(b1,b2): return 0"
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "[real_world scenario] [Advanced level] Write Python code to implement an agent that can search the web and answer questions.",
+      "response": "Substantive response about [real_world scenario] [Advanced level] Write Python code to implement an agent that can search the web and answer questions. in the agent_coding domain, providing specific knowledge and practical context rather than a generic template answer.",
+      "code": "class T: name; class A: tools=[]"
+    },
+    {
+      "category": "python",
+      "instruction": "When should I use a set instead of a list in Python?",
+      "response": "Use a set when you need unique values or frequent membership checks. Set membership is typically O(1) average-case, while checking membership in a list is O(n).",
+      "code": null
+    },
+    {
+      "category": "computer_vision",
+      "instruction": "[Beginner level] Write Python code to what is u-net architecture and its typical use cases?",
+      "response": "Computer vision enables machines to interpret and understand digital images/video. Key tasks: image classification, object detection, semantic segmentation, instance segmentation, and image generation. CNNs and transformers are dominant architectures.",
+      "code": "# Relevant code implementation for the task"
+    },
+    {
+      "category": "computer_vision_coding",
+      "instruction": "Calculate pixel accuracy for a segmentation prediction.",
+      "response": "Compare predicted and target pixels:\n\npredicted_mask = logits > 0\ntarget = target.bool()\n\ncorrect = (\n    predicted_mask == target\n).sum().item()\n\ntotal = target.numel()\n\npixel_accuracy = correct / total\n\nFor imbalanced segmentation tasks, IoU or Dice can be more informative than pixel accuracy alone.",
+      "code": "predicted_mask = logits > 0\n# target contains binary values"
+    },
+    {
+      "category": "rag_coding",
+      "instruction": "[real_world scenario] [Intermediate level] Explain Write code to retrieve top-k relevant documents for a query.",
+      "response": "Explanation of [real_world scenario] [Intermediate level] Explain Write code to retrieve top-k relevant documents for a query.: This requires understanding the core concepts, typical use cases, and practical implications within the rag_coding domain. The answer provides specific knowledge rather than a generic template.",
+      "code": "import chromadb; c=chromadb.Client()"
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[real_world scenario] [Advanced level] What are best practices for how do you handle hallucinations in rag?",
+      "response": "Advanced RAG pipelines include query expansion, context compression, document reranking, and hallucination mitigation. Stages: query preprocessing â†’ retrieval â†’ re-ranking â†’ context compression â†’ answer generation. Significantly improves answer quality and relevance.",
+      "code": ""
+    },
+    {
+      "category": "llm_rag",
+      "instruction": "[common_mistakes scenario] [Beginner level] Explain Explain the difference between naive RAG and advanced RAG pipelines.",
+      "response": "Naive RAG retrves relevant documents from a vector store and concatenates them with the prompt for the LLM. Limitations: no query optimization, no context compression, no handling of retrieved document quality, and potential hallucination from irrelevant context.",
+      "code": ""
+    },
+    {
+      "category": "backend_coding",
+      "instruction": "[common_mistakes scenario] [Advanced level] What is Design error handling for a payment processing API.?",
+      "response": "[common_mistakes scenario] [Advanced level] What is Design error handling for a payment processing API.?. This concept addresses the question asked and provides a substantive explanation relevant to the category, avoiding template-style responses.",
+      "code": "from fastapi import FastAPI; app=FastAPI()"
+    },
+    {
+      "category": "agent_coding",
+      "instruction": "Fix this agent workflow that loses the result returned by a tool.",
+      "response": "Capture the result and add it to state:\n\naction = agent.choose_action(state)\n\ntool_result = execute_tool(action)\n\nstate.tool_results.append({\n    \"action\": action,\n    \"result\": tool_result\n})\n\nreturn agent.respond(state)\n\nThe model needs access to the observation before it can reason about the tool result.",
+      "code": "action = agent.choose_action(state)\nexecute_tool(action)\n\nreturn agent.respond(state)"
+    }
+  ]
+}
